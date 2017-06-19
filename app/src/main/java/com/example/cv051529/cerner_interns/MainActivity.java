@@ -1,8 +1,12 @@
 package com.example.cv051529.cerner_interns;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,10 +16,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    public static String tag = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +49,46 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Uri originalPage = getIntent().getData();
+        //String name = originalPage.getQueryParameter("name");
+        Uri uri = Uri.parse("http://10.0.2.2:8080/openidpoc");
+        final Intent logInPage = new Intent(Intent.ACTION_VIEW, uri);
+
+        Button btnLogIn = (Button) (findViewById(R.id.log_in_btn));
+        btnLogIn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(logInPage);
+            }
+        });
+        Button btnQuestion = (Button) (findViewById(R.id.Go_To_Question));
+        btnQuestion.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                goToQuestionActivity();
+            }
+        });
+
+
+        //Log.i(tag,name);
+
+        //if(name != null || name != ""){
+        //    goToQuestionActivity();
+        //} else {
+
+            //startActivity(intent);
+        //}
     }
+
+    public void goToQuestionActivity()
+    {
+        Intent intent = new Intent(this,QuestionSearchActivity.class);
+        startActivity(intent);
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -83,10 +131,6 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
 

@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cerner-intern-andriod.iml" filepath="$PROJECT_DIR$/cerner-intern-andriod.iml" />
       <module fileurl="file://$PROJECT_DIR$/cerner_interns.iml" filepath="$PROJECT_DIR$/cerner_interns.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mysql-connector-java-5.1.6/mysql-connector-java-5.1.6.iml" filepath="$PROJECT_DIR$/mysql-connector-java-5.1.6/mysql-connector-java-5.1.6.iml" />
     </modules>
   </component>
 </project>
