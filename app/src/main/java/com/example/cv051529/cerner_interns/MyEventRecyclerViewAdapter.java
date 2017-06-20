@@ -6,22 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.cv051529.cerner_interns.Content.Event;
 import com.example.cv051529.cerner_interns.EventFragment.OnListFragmentInteractionListener;
-import com.example.cv051529.cerner_interns.Content.EventContent.EventItem;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link EventItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link Event} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyEventRecyclerViewAdapter extends RecyclerView.Adapter<MyEventRecyclerViewAdapter.ViewHolder> {
 
-    private final List<EventItem> mValues;
+    public List<Event> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyEventRecyclerViewAdapter(List<EventItem> items, OnListFragmentInteractionListener listener) {
+    public MyEventRecyclerViewAdapter(List<Event> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -62,7 +62,7 @@ public class MyEventRecyclerViewAdapter extends RecyclerView.Adapter<MyEventRecy
         public final TextView mTitleView;
         public final TextView mLocationView;
         public final TextView mDescriptionView;
-        public EventItem mItem;
+        public Event mItem;
 
         public ViewHolder(View view) {
             super(view);

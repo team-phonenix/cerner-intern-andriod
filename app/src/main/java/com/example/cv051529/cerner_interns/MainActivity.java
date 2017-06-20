@@ -13,7 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.cv051529.cerner_interns.Content.EventContent;
+import com.example.cv051529.cerner_interns.Content.Event;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void onListFragmentInteraction(EventContent.EventItem item) {
+    public void onListFragmentInteraction(Event item) {
         System.out.println("item selected");
     }
 }
