@@ -24,15 +24,14 @@
 
     <ListView
         android:id="@+id/questionListView"
-        android:layout_width="366dp"
-        android:layout_height="459dp"
-        android:layout_marginBottom="0dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_width="367dp"
+        android:layout_height="208dp"
+        android:layout_marginBottom="-20dp"
+        android:layout_marginLeft="-347dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.862"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteX="-6dp"
-        tools:layout_editor_absoluteY="52dp" />
+        app:layout_constraintHorizontal_bias="0.7"
+        tools:layout_editor_absoluteY="303dp" />
 </android.support.constraint.ConstraintLayout>

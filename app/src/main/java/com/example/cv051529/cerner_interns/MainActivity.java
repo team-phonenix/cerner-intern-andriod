@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         Uri originalPage = getIntent().getData();
-        //String name = originalPage.getQueryParameter("name");
+
         Uri uri = Uri.parse("http://10.0.2.2:8080/openidpoc");
         final Intent logInPage = new Intent(Intent.ACTION_VIEW, uri);
 
@@ -72,7 +72,14 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        TextView displayTxt = (TextView)findViewById(R.id.hello_world_txt);
+        try {
+            String email = originalPage.getQueryParameter("email");
+            displayTxt.setText(email);
+        } catch (Exception e)
+        {
 
+        }
         //Log.i(tag,name);
 
         //if(name != null || name != ""){
