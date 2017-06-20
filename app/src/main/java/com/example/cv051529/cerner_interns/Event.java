@@ -1,4 +1,4 @@
-package com.example.cv051529.cerner_interns.Content;
+package com.example.cv051529.cerner_interns;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +38,8 @@ public class Event {
         for(int i = 0; i < jsonArray.length(); i++) {
             try {
                 JSONObject obj = jsonArray.getJSONObject(i);
-                Event event = new Event(obj.getInt("id"), obj.getString("title"), obj.getString("description"),
+                System.out.println(obj);
+                Event event = new Event(obj.getInt("eventID"), obj.getString("title"), obj.getString("description"),
                         obj.getString("location"), obj.getString("startTime"), obj.getString("endTime"));
                 events.add(event);
             } catch (JSONException e) {

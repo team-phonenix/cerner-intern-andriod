@@ -5,16 +5,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.ListViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.example.cv051529.cerner_interns.Content.Event;
 
 import org.json.JSONArray;
 
@@ -66,21 +66,36 @@ public class EventFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_event_list, container, false);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            final RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            MyEventRecyclerViewAdapter adapter = new MyEventRecyclerViewAdapter(new ArrayList<Event>(), mListener);
-            recyclerView.setAdapter(adapter);
-            getData(adapter);
-            adapter.registerAdapterDataObserver(this);
-        }
+        EventAdapter adapter = new EventAdapter(view.getContext(), new ArrayList<Event>());
+        ListViewCompat listView = (ListViewCompat) view;
+        listView.setAdapter(adapter);
+        getEventData(adapter);
 
         return view;
+    }
+
+    public void getEventData(final EventAdapter adapter) {
+        String url = "http://10.190.232.162:3000/event";
+
+        JsonArrayRequest jsObjRequest = new JsonArrayRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        adapter.addAll(Event.createEvents(response));
+                        adapter.notifyDataSetChanged();
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
+
+        // Access the RequestQueue through your singleton class.
+        RequestQueueSingleton.getInstance(this.getContext()).addToRequestQueue(jsObjRequest);
     }
 
 
@@ -99,29 +114,6 @@ public class EventFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    public void getData(final MyEventRecyclerViewAdapter adapter) {
-        String url = "http://10.190.232.162:3000/event";
-        JsonArrayRequest jsArrayRequest = new JsonArrayRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        adapter.mValues = Event.createEvents(response);
-                        adapter.notifyDataSetChanged();
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-
-                    }
-                });
-
-        // Access the RequestQueue through your singleton class.
-        RequestQueueSingleton.getInstance(this.getContext()).addToRequestQueue(jsArrayRequest);
     }
 
     /**
